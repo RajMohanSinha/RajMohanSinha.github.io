@@ -220,12 +220,12 @@ ul.todo li .buttons button.complete svg .fill {
 ul.todo#todo,
 ul.todo#completed {
   position: relative;
-  padding: 20px 60px 30px 60px;
+  padding: 1% 2% 1% 2%;
 }
 
 ul.todo#todo:empty:after {
   content: 'You have nothing to-do!';
-  margin: 15px 0 0 0;
+  margin: 1% 0 0 0;
 }
 
 ul.todo#completed:empty:after {
@@ -237,13 +237,13 @@ ul.todo#completed:after {
   width: 100%;
   display: block;
   text-align: center;
-  font-size: 12px;
+  font-size: 100%;
   color: #aaa;
 }
 
 ul.todo#head2,
 ul.todo#head1{
-	margin-left:50px;
+	margin-left:1.8%;
 	font-style:italic;
 	color:blue;
 }
