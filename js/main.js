@@ -43,9 +43,11 @@ function renderTodoList() {
 	console.log('This Browser does not support notification!');
   }
   else{
-	Notification.requestPermission(function(status) {
-	  console.log('Notification permission status: ',status);
-	});
+	if(!(Notification.permission=='granted')){
+	  Notification.requestPermission(function(status) {
+		console.log('Notification permission status: ',status);
+	  });
+	}
   }
   if (!data.todo.length && !data.completed.length) return;
 
