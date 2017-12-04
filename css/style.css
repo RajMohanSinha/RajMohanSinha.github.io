@@ -237,7 +237,7 @@ ul.todo#completed:after {
   width: 100%;
   display: block;
   text-align: center;
-  font-size: 100%;
+  font-size: 120%;
   color: #aaa;
 }
 
