@@ -7,6 +7,8 @@ var files = [
   './css/style.css',
   './css/reset.css',
   './js/main.js',
+  './js/bootstrap.min.js',
+  './js/jquery.min.js',
   './favicon.ico',
   './manifest.json',
   './img/icon-48.png',
@@ -35,6 +37,32 @@ self.addEventListener('install', (event) => {
   );
 });
 
+self.addEventListener('activate', function(event) {
+  console.log('Activating new service worker...');
+  var cacheWhitelist = [Name];
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
+self.addEventListener('fetch', function(event) {
+
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+/*
 self.addEventListener('fetch', (event) => {
   console.info('Event: Fetch',event.request.url);
   var request = event.request;
@@ -44,7 +72,6 @@ self.addEventListener('fetch', (event) => {
       if (response) {
         return response;
       }
-
       return fetch(request).then((response) => {
         var responseToCache = response.clone();
         caches.open(Name).then((cache) => {
@@ -58,21 +85,11 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+*/
 
-self.addEventListener('activate', function(event) {
-  console.log('Activating new service worker...');
 
-  var cacheWhitelist = [Name];
-
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
+self.addEventListener('notificationclose',function(e){
+	var msg=e.notification;	
+	console.log('Notification Closed!'+msg);
+	
 });

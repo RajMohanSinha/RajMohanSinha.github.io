@@ -29,9 +29,24 @@ function addItem (value) {
 
   data.todo.push(value);
   dataObjectUpdated();
+  
+  if(Notification.permission=='granted') {
+	navigator.serviceWorker.getRegistration().then(function(reg) {
+	  reg.showNotification('Task Added: \n'+ value);
+	  });
+  }
+  
 }
 
 function renderTodoList() {
+  if(!('Notification' in window)){
+	console.log('This Browser does not support notification!');
+  }
+  else{
+	Notification.requestPermission(function(status) {
+	  console.log('Notification permission status: ',status);
+	});
+  }
   if (!data.todo.length && !data.completed.length) return;
 
   for (var i = 0; i < data.todo.length; i++) {
@@ -63,6 +78,11 @@ function removeItem() {
   dataObjectUpdated();
 
   parent.removeChild(item);
+  if(Notification.permission=='granted') {
+	navigator.serviceWorker.getRegistration().then(function(reg) {
+	  reg.showNotification('Task Deleted: \n'+ value);
+	  });
+  }
 }
 
 function completeItem() {
@@ -74,9 +94,24 @@ function completeItem() {
   if (id === 'todo') {
     data.todo.splice(data.todo.indexOf(value), 1);
     data.completed.push(value);
-  } else {
+	
+	if(Notification.permission=='granted') {
+	navigator.serviceWorker.getRegistration().then(function(reg) {
+	  reg.showNotification('Task Completed: \n'+ value);
+	  });
+	}
+	
+  } 
+  else {
     data.completed.splice(data.completed.indexOf(value), 1);
     data.todo.push(value);
+	
+	if(Notification.permission=='granted') {
+	navigator.serviceWorker.getRegistration().then(function(reg) {
+	  reg.showNotification('Task Added Again: \n'+ value);
+	  });
+	}
+	
   }
   dataObjectUpdated();
 
@@ -84,6 +119,7 @@ function completeItem() {
 
   parent.removeChild(item);
   target.insertBefore(item, target.childNodes[0]);
+  
 }
 
 function addItemToDOM(text, completed) {
@@ -112,6 +148,7 @@ function addItemToDOM(text, completed) {
   item.appendChild(buttons);
 
   list.insertBefore(item, list.childNodes[0]);
+  
 }
 
 if ( 'serviceWorker' in navigator ) {
