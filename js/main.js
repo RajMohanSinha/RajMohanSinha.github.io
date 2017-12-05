@@ -37,7 +37,7 @@ function addItem (value) {
 				  icon: 'img/icon.jpg',
 				  vibrate: [100, 50, 100],
 				  actions: [{action: 'close', title: 'Close notification',
-				   icon:'img/close.jpg'}]
+				   icon:'img/close.png'}]
 			  };
 	  reg.showNotification('To-Do: Task Updated',options);
 	  });
@@ -97,7 +97,7 @@ function removeItem() {
 				  icon: 'img/icon.jpg',
 				  vibrate: [100, 50, 100],
 				  actions: [{action: 'close', title: 'Close notification',
-				   icon:'img/close.jpg'}]
+				   icon:'img/close.png'}]
 			  };
 	  reg.showNotification('To-Do: Task Updated',options);
 	  });
@@ -121,7 +121,7 @@ function completeItem() {
 				  icon: 'img/icon.jpg',
 				  vibrate: [100, 50, 100],
 				  actions: [{action: 'close', title: 'Close notification',
-				   icon:'img/close.jpg'}]
+				   icon:'img/close.png'}]
 			  };
 	  reg.showNotification('To-Do: Task Updated',options);
 	  });
@@ -139,7 +139,7 @@ function completeItem() {
 				  icon: 'img/icon.jpg',
 				  vibrate: [100, 50, 100],
 				  actions: [{action: 'close', title: 'Close notification',
-				   icon:'img/close.jpg'}]
+				   icon:'img/close.png'}]
 			  };
 	  reg.showNotification('To-Do: Task Updated',options);
 	  });
