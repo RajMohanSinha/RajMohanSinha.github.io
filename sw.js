@@ -11,6 +11,8 @@ var files = [
   './js/jquery.min.js',
   './favicon.ico',
   './manifest.json',
+  './img/close.png',
+  './img/icon.jpg',
   './img/icon-48.png',
   './img/icon-96.png',
   './img/icon-144.png',
