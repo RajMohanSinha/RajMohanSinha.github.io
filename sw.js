@@ -93,3 +93,11 @@ self.addEventListener('notificationclose',function(e){
 	console.log('Notification Closed!'+msg);
 	
 });
+
+self.addEventListener('notificationclick',function(e){
+	var n=e.notification;
+	var action=e.action;
+	if(action==='close'){
+		n.close();
+	}
+});

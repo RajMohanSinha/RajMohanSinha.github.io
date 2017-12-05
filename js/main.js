@@ -32,7 +32,14 @@ function addItem (value) {
   
   if(Notification.permission=='granted') {
 	navigator.serviceWorker.getRegistration().then(function(reg) {
-	  reg.showNotification('Task Added: \n'+ value);
+	  var options = {
+				  body: 'Task Added!\n'+value,
+				  icon: 'img/icon.jpg',
+				  vibrate: [100, 50, 100],
+				  actions: [{action: 'close', title: 'Close notification',
+				   icon:'img/close.png'}]
+			  };
+	  reg.showNotification('To-Do: Task Updated',options);
 	  });
   }
   
@@ -49,6 +56,7 @@ function renderTodoList() {
 	  });
 	}
   }
+  
   if (!data.todo.length && !data.completed.length) return;
 
   for (var i = 0; i < data.todo.length; i++) {
@@ -74,15 +82,24 @@ function removeItem() {
 
   if (id === 'todo') {
     data.todo.splice(data.todo.indexOf(value), 1);
-  } else {
+  } 
+  else {
     data.completed.splice(data.completed.indexOf(value), 1);
   }
   dataObjectUpdated();
 
   parent.removeChild(item);
+  
   if(Notification.permission=='granted') {
 	navigator.serviceWorker.getRegistration().then(function(reg) {
-	  reg.showNotification('Task Deleted: \n'+ value);
+	  var options = {
+				  body: 'Task Deleted!\n'+value,
+				  icon: 'img/icon.jpg',
+				  vibrate: [100, 50, 100],
+				  actions: [{action: 'close', title: 'Close notification',
+				   icon:'img/close.png'}]
+			  };
+	  reg.showNotification('To-Do: Task Updated',options);
 	  });
   }
 }
@@ -99,9 +116,16 @@ function completeItem() {
 	
 	if(Notification.permission=='granted') {
 	navigator.serviceWorker.getRegistration().then(function(reg) {
-	  reg.showNotification('Task Completed: \n'+ value);
+	  var options = {
+				  body: 'Task Completed!\n'+value,
+				  icon: 'img/icon.jpg',
+				  vibrate: [100, 50, 100],
+				  actions: [{action: 'close', title: 'Close notification',
+				   icon:'img/close.png'}]
+			  };
+	  reg.showNotification('To-Do: Task Updated',options);
 	  });
-	}
+  }
 	
   } 
   else {
@@ -110,9 +134,16 @@ function completeItem() {
 	
 	if(Notification.permission=='granted') {
 	navigator.serviceWorker.getRegistration().then(function(reg) {
-	  reg.showNotification('Task Added Again: \n'+ value);
+	  var options = {
+				  body: 'Task Re-Added!\n'+value,
+				  icon: 'img/icon.jpg',
+				  vibrate: [100, 50, 100],
+				  actions: [{action: 'close', title: 'Close notification',
+				   icon:'img/close.png'}]
+			  };
+	  reg.showNotification('To-Do: Task Updated',options);
 	  });
-	}
+  }
 	
   }
   dataObjectUpdated();
